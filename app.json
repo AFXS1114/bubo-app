@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "BUBO",
+    "slug": "bubo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "bubo",
+    "userInterfaceStyle": "light",
+    "android": {
+      "package": "com.bubo.traps",
+      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"]
+    },
+    "updates": {
+      "url": "https://u.expo.dev/ef8c921c-fb27-4183-90aa-3b36f747331a",
+      "checkAutomatically": "ON_ERROR_RECOVERY",
+      "fallbackToCacheTimeout": 0
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ef8c921c-fb27-4183-90aa-3b36f747331a"
+      }
+    }
+  }
+}
