@@ -1,0 +1,5 @@
+import * as Location from 'expo-location';
+export type GPSReading = { latitude: number; longitude: number; accuracy: number };
+export async function requestLocationPermission(): Promise<boolean> { const result = await Location.requestForegroundPermissionsAsync(); return result.status === 'granted'; }
+export async function getCurrentGPS(): Promise<GPSReading> { const permitted = await requestLocationPermission(); if (!permitted) throw new Error('LOCATION_PERMISSION_REQUIRED'); const result = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High }); return { latitude: result.coords.latitude, longitude: result.coords.longitude, accuracy: result.coords.accuracy ?? 9999 }; }
+export async function watchGPS(callback: (reading: GPSReading) => void): Promise<Location.LocationSubscription> { const permitted = await requestLocationPermission(); if (!permitted) throw new Error('LOCATION_PERMISSION_REQUIRED'); return Location.watchPositionAsync({ accuracy: Location.Accuracy.High, distanceInterval: 5, timeInterval: 3000 }, ({ coords }) => callback({ latitude: coords.latitude, longitude: coords.longitude, accuracy: coords.accuracy ?? 9999 })); }

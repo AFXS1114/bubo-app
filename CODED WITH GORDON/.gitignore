@@ -1,0 +1,63 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+.yarn/
+
+# Expo and React Native local state
+.expo/
+.expo-shared/
+.metro-cache/
+.cache/
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.keystore
+*.jks
+
+# Android and iOS build outputs
+android/.gradle/
+android/.idea/
+android/build/
+android/app/build/
+android/app/release/
+android/local.properties
+ios/Pods/
+ios/build/
+ios/DerivedData/
+*.xcworkspace/xcuserdata/
+
+# Expo/EAS build artifacts
+.expo-shared/
+dist/
+web-build/
+.eas/
+
+# Logs and diagnostics
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDE and OS files
+.idea/
+.vscode/
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# Coverage and test output
+coverage/
+.nyc_output/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
