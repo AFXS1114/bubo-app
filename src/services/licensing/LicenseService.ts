@@ -2,7 +2,7 @@ import * as SecureStore from 'expo-secure-store';
 import Constants from 'expo-constants';
 import * as Device from 'expo-device';
 
-export type LicenseState = 'NOT_ACTIVATED' | 'ACTIVATING' | 'ACTIVE' | 'EXPIRED' | 'REVOKED' | 'DEVICE_REPLACEMENT_REQUIRED' | 'NETWORK_REQUIRED' | 'SERVER_ERROR' | 'INVALID_LICENSE';
+export type LicenseState = 'NOT_ACTIVATED' | 'ACTIVATING' | 'ACTIVE' | 'EXPIRED' | 'REVOKED' | 'DEVICE_REPLACEMENT_REQUIRED' | 'NETWORK_REQUIRED' | 'SERVER_ERROR' | 'INVALID_LICENSE' | 'LICENSE_API_ROUTE_MISSING';
 export type LicenseInfo = { customerName: string; licenseKey: string; status: 'ACTIVE' | 'EXPIRED' | 'REVOKED'; expiresAt?: string; deviceName: string; validatedAt: string; graceUntil?: string; credential?: string };
 type ApiLicenseResponse = LicenseInfo & { credential?: string; activationCredential?: string };
 const STORAGE_KEY = 'bubo.activation.v2';
@@ -11,7 +11,8 @@ const apiBase = configuredApiBase.replace(/\/$/, '');
 
 function normalizeKey(rawKey: string): string { return rawKey.replace(/\s+/g, '').toUpperCase(); }
 function apiError(status: number): Error {
-  if (status === 400 || status === 404) return new Error('INVALID_LICENSE');
+  if (status === 404) return new Error('LICENSE_API_ROUTE_MISSING');
+  if (status === 400) return new Error('INVALID_LICENSE');
   if (status === 401 || status === 403) return new Error('DEVICE_REPLACEMENT_REQUIRED');
   if (status === 409) return new Error('DEVICE_LIMIT_REACHED');
   return new Error('SERVER_ERROR');
